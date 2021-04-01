@@ -1,14 +1,15 @@
 Feature: Create account
-  I want to use this template for my feature file. Förklaring om vad vår feature är på eng
+  I want to want to be able to create an account with different scenarios. Förklaring om vad vår feature är på eng
 
-  Scenario Outline: Title of your scenario outline. titeln av vårt testfall
+  Scenario Outline: Title of your scenario outline
   
-  	Given I have logged in at Mailchimp
+  	Given I have navigated at Mailchimp
     And I have entered <email>
-    When I check for the <value> in step
-    Then I verify the <status> in step
+    And I have also entered <userName>
+    And I have entered password
+		When I click on the sign up button
+		Then I get <status>
 
     Examples: 
-      | email  | value | status  |
-      | "phhh.hhh@gmail.com" |     5 | success |
-      | name2 |     7 | Fail    |
+      | email | userName | status |
+      | "phhh.hhh@gmail.com" |   "paula"   | "success" |
