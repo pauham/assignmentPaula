@@ -12,4 +12,4 @@ Feature: Create account
 
     Examples: 
       | email | userName | status |
-      | "phhh.hhh@gmail.com" |   "paula"   | "success" |
+      | "phhh.hhh@gmail.com" |"abc"| "success" |
