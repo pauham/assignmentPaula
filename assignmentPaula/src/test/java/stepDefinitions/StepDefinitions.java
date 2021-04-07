@@ -1,5 +1,7 @@
 package stepDefinitions;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.Random;
 
 import org.openqa.selenium.By;
@@ -47,9 +49,13 @@ public class StepDefinitions {
 		Thread.sleep(1000);
 	}
 	
+	@And("I have also entered longUsername")
+	public void longUsername() {
+		longRandomUsername(By.id("new_username"));
+	}
+	
 	private void sentUserName(By by) {
-		driver.findElement(by).sendKeys(emailString);
-		
+		driver.findElement(by).sendKeys(emailString);	
 	}
 
 	@Given("I have entered password")
@@ -68,9 +74,18 @@ public class StepDefinitions {
 		Thread.sleep(1000);
 	}
 
-	@Then("I get {string}")
-	public void i_get(/*String string*/) {
+	@Then("I get success")
+	public void i_verify_success() {
 		System.out.println("fifth");
+		WebElement verifyingSuccess = driver.findElement(By.cssSelector("h1[class*=margin-bottom--lv3]"));
+		assertEquals("Check your email", verifyingSuccess.getText());
+		driver.quit();
+	}
+	
+	@Then("I get failure")
+	public void i_verify_failure_long_username() {
+		System.out.println("fifth");
+		//WebElement verifyingLongUsername = driver.findElement
 		driver.quit();
 	}
 	
@@ -79,5 +94,9 @@ public class StepDefinitions {
 		int randomInt = rand.nextInt(1000000);
 		emailString = "svenne" + randomInt + "@gmail.com";
 		driver.findElement(by).sendKeys(emailString);
+	}
+	
+	private void longRandomUsername(By by) {
+		driver.findElement(by).sendKeys("1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111");
 	}
 }
