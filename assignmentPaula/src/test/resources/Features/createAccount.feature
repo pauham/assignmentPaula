@@ -5,11 +5,14 @@ Feature: Create account
   
   	Given I have navigated at Mailchimp
     And I have entered <email>
-    And I have also entered <userName>
+    And I have also entered <username>
     And I have entered password
 		When I click on the sign up button
 		Then I get <status>
 
     Examples: 
-      | email | userName | status |
-      | "phhh.hhh@gmail.com" |"abc"| "success" |
+      | email | username | status |
+      | email |username| success | #allt går som förväntat
+      #| "email" |"abc"| "success" | #långt användarnamn, mer än 100 tecken
+      #| "email" |"abc"| "success" | #userName redan upptagen !!
+      #| "email" |"abc"| "success" | #email saknas
