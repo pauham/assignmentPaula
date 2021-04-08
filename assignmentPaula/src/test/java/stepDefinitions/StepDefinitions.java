@@ -8,6 +8,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -54,6 +56,12 @@ public class StepDefinitions {
 		longRandomUsername(By.id("new_username"));
 	}
 	
+	@And("I have also entered usernameTaken")
+	public void usernameTaken() {
+		WebElement usernameTaken = driver.findElement(By.id("new_username"));
+		usernameTaken.sendKeys("Anna");
+	}
+	
 	private void sentUserName(By by) {
 		driver.findElement(by).sendKeys(emailString);	
 	}
@@ -85,7 +93,15 @@ public class StepDefinitions {
 	@Then("I get failure")
 	public void i_verify_failure_long_username() {
 		System.out.println("fifth");
-		//WebElement verifyingLongUsername = driver.findElement
+		WebElement verifyingLongUsername = driver.findElement(By.cssSelector("span[class=invalid-error"));
+		assertEquals("Enter a value less than 100 characters long", verifyingLongUsername.getText());
+		driver.quit();
+	}
+	
+	@Then("I get failed")
+	public void i_verify_taken_username() {
+		WebElement verifyingTakenUsername = driver.findElement(By.cssSelector("span[class=invalid-error"));
+		assertEquals("Another user with this username already exists. Maybe it's your evil twin. Spooky.", verifyingTakenUsername.getText());
 		driver.quit();
 	}
 	
@@ -97,6 +113,7 @@ public class StepDefinitions {
 	}
 	
 	private void longRandomUsername(By by) {
-		driver.findElement(by).sendKeys("1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111");
+		(new WebDriverWait(driver, 10)).until(ExpectedConditions.elementToBeClickable(by));
+		driver.findElement(by).sendKeys("abcSvenneNotToLong1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111");
 	}
 }

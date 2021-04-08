@@ -13,6 +13,6 @@ Feature: Create account
     Examples: 
       | email | username | status |
       #| email |username| success | #allt går som förväntat
-      | email | longUsername | failure | #långt användarnamn, mer än 100 tecken
-      #| "email" |"abc"| "success" | #userName redan upptagen !!
-      #| "email" |"abc"| "success" | #email saknas
+     # | email | longUsername | failure | #långt användarnamn, mer än 100 tecken
+      | email |usernameTaken| failed | #userName redan upptagen !!
+      #| "email" |"abc"| fail | #email saknas
