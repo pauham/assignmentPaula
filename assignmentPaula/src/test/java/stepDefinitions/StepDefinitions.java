@@ -40,6 +40,13 @@ public class StepDefinitions {
 		//email.sendKeys("email");
 		Thread.sleep(1000);
 	}
+	
+	@Given("I have entered missingEmail")
+	public void i_have_entered_missingEmail() {
+		WebElement missingEmail = driver.findElement(By.id("email"));
+		missingEmail.click();
+		missingEmail.sendKeys("");
+	}
 
 	@And("I have also entered username") //userName
 	public void i_also_have_entered() throws InterruptedException {
@@ -79,7 +86,7 @@ public class StepDefinitions {
 		System.out.println("fourth");
 		WebElement signUp = driver.findElement(By.id("create-account"));
 		signUp.click();
-		Thread.sleep(1000);
+		//Thread.sleep(1000);
 	}
 
 	@Then("I get success")
@@ -102,6 +109,13 @@ public class StepDefinitions {
 	public void i_verify_taken_username() {
 		WebElement verifyingTakenUsername = driver.findElement(By.cssSelector("span[class=invalid-error"));
 		assertEquals("Another user with this username already exists. Maybe it's your evil twin. Spooky.", verifyingTakenUsername.getText());
+		driver.quit();
+	}
+	
+	@Then("I get fail")
+	public void i_verify_missingEmail() {
+		WebElement verifyingMissingEmail = driver.findElement(By.cssSelector("span[class=invalid-error"));
+		assertEquals("Please enter a value", verifyingMissingEmail.getText());
 		driver.quit();
 	}
 	

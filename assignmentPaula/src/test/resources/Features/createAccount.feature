@@ -14,5 +14,5 @@ Feature: Create account
       | email | username | status |
       #| email |username| success | #allt går som förväntat
      # | email | longUsername | failure | #långt användarnamn, mer än 100 tecken
-      | email |usernameTaken| failed | #userName redan upptagen !!
-      #| "email" |"abc"| fail | #email saknas
+     # | email |usernameTaken| failed | #userName redan upptagen !!
+      | missingEmail |username| fail | #email saknas
