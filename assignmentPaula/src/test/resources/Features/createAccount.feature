@@ -1,7 +1,7 @@
 Feature: Create account
-  I want to want to be able to create an account with different scenarios. Förklaring om vad vår feature är på eng
+  I want to want to be able to create an account with different scenarios.
 
-  Scenario Outline: Title of your scenario outline
+  Scenario Outline: To create accounts on Mailchimp
   
   	Given I have navigated at Mailchimp
     And I have entered <email>
@@ -12,7 +12,7 @@ Feature: Create account
 
     Examples: 
      | email | username | status | message |
-   	 #| email |username| success | "Check your email" | #allt går som förväntat
-     #| email | longUsername | fail| "Enter a value less than 100 characters long" | #långt användarnamn, mer än 100 tecken
-    # | email |usernameTaken| fail | "Another user with this username already exists. Maybe it's your evil twin. Spooky." | #userName redan upptagen !!
-     | missingEmail |username| fail | "Please enter a value" | #email saknas
+   	 | email |username| success | "Check your email" |
+     | email | longUsername | fail| "Enter a value less than 100 characters long" |
+     | email |usernameTaken| fail | "Another user with this username already exists. Maybe it's your evil twin. Spooky." |
+     | missingEmail |username| fail | "Please enter a value" |

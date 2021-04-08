@@ -18,21 +18,18 @@ import io.cucumber.java.en.When;
 
 public class StepDefinitions {
 	WebDriver driver;
-	char emailRandom;
 	String emailString;
 	
 	@Given("I have navigated at Mailchimp")
 	public void i_have_navigated_at_mailchimp() {
-		System.out.println("Log in");
 		System.setProperty("webdriver.chrome.driver", "C:\\Users\\paula\\eclipse\\java-2020-09\\eclipse\\drivers\\chromedriver.exe");
 		driver = new ChromeDriver();
 		driver.get("https://login.mailchimp.com/signup/");
 		driver.manage().window().maximize();
 	}
 
-	@Given("I have entered email") //email
+	@Given("I have entered email")
 	public void i_have_entered() {
-		System.out.println("first");
 		Random rand = new Random();
 		int randomInt = rand.nextInt(1000000);
 		emailString = "svenne" + randomInt + "@gmail.com";
@@ -41,16 +38,14 @@ public class StepDefinitions {
 	
 	@Given("I have entered missingEmail")
 	public void i_have_entered_missingEmail() {
-		//emailString = "hejsanBestUserName";
 		sendKeys(By.id("email"), "");
 	}
 
-	@And("I have also entered username") //userName
+	@And("I have also entered username")
 	public void i_also_have_entered() {
-		System.out.println("third");
 		Random rand = new Random();
 		int randomInt = rand.nextInt(1000000);
-		emailString = "marie" + randomInt + "@gmail.com";
+		emailString = "marie" + randomInt + "abc";
 		sendKeys(By.id("new_username"), emailString);
 	}
 	
@@ -66,20 +61,17 @@ public class StepDefinitions {
 
 	@Given("I have entered password")
 	public void i_have_entered_password() {
-		System.out.println("second");
 		sendKeys(By.name("password"), "ABCabc123&");
 	}
 
 	@When("I click on the sign up button")
 	public void i_click_on_the_sign_up_button() {
-		System.out.println("fourth");
 		click(By.id("onetrust-accept-btn-handler"));
 		click(By.id("create-account"));
 	}
 
 	@Then("I get success and get {string}")
 	public void i_verify_success(String message) {
-		System.out.println("fifth");
 		WebElement verifyingSuccess = driver.findElement(By.cssSelector("h1[class*=margin-bottom--lv3]"));
 		assertEquals(message, verifyingSuccess.getText());
 		driver.quit();
