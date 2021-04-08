@@ -29,6 +29,7 @@ public class StepDefinitions {
 		driver = new ChromeDriver();
 		driver.get("https://login.mailchimp.com/signup/");
 		driver.manage().window().maximize();
+		
 		Thread.sleep(1000);
 	}
 
@@ -43,9 +44,11 @@ public class StepDefinitions {
 	
 	@Given("I have entered missingEmail")
 	public void i_have_entered_missingEmail() {
-		WebElement missingEmail = driver.findElement(By.id("email"));
-		missingEmail.click();
-		missingEmail.sendKeys("");
+		emailString = "hejsan";
+		//String noEmail = "";
+		//WebElement missingEmail = driver.findElement(By.id("email"));
+		//missingEmail.click();
+		//missingEmail.sendKeys(noEmail);
 	}
 
 	@And("I have also entered username") //userName
@@ -70,7 +73,7 @@ public class StepDefinitions {
 	}
 	
 	private void sentUserName(By by) {
-		driver.findElement(by).sendKeys(emailString);	
+		driver.findElement(by).sendKeys(emailString);
 	}
 
 	@Given("I have entered password")
@@ -84,20 +87,22 @@ public class StepDefinitions {
 	@When("I click on the sign up button")
 	public void i_click_on_the_sign_up_button() throws InterruptedException {
 		System.out.println("fourth");
+		WebElement cookies = driver.findElement(By.id("onetrust-accept-btn-handler"));
+		cookies.click();
 		WebElement signUp = driver.findElement(By.id("create-account"));
 		signUp.click();
 		//Thread.sleep(1000);
 	}
 
-	@Then("I get success")
-	public void i_verify_success() {
+	@Then("I get success and get {string}")
+	public void i_verify_success(String message) {
 		System.out.println("fifth");
 		WebElement verifyingSuccess = driver.findElement(By.cssSelector("h1[class*=margin-bottom--lv3]"));
-		assertEquals("Check your email", verifyingSuccess.getText());
+		assertEquals(message, verifyingSuccess.getText());
 		driver.quit();
 	}
 	
-	@Then("I get failure")
+	/*@Then("I get failure")
 	public void i_verify_failure_long_username() {
 		System.out.println("fifth");
 		WebElement verifyingLongUsername = driver.findElement(By.cssSelector("span[class=invalid-error"));
@@ -110,12 +115,12 @@ public class StepDefinitions {
 		WebElement verifyingTakenUsername = driver.findElement(By.cssSelector("span[class=invalid-error"));
 		assertEquals("Another user with this username already exists. Maybe it's your evil twin. Spooky.", verifyingTakenUsername.getText());
 		driver.quit();
-	}
-	
-	@Then("I get fail")
-	public void i_verify_missingEmail() {
+	}*/
+
+	@Then("I get fail and get {string}")
+	public void i_verify_(String message) {
 		WebElement verifyingMissingEmail = driver.findElement(By.cssSelector("span[class=invalid-error"));
-		assertEquals("Please enter a value", verifyingMissingEmail.getText());
+		assertEquals(message, verifyingMissingEmail.getText());
 		driver.quit();
 	}
 	
